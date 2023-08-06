@@ -79,7 +79,9 @@ contract OurTokenTest is StdCheats, Test {
         // Raj attempts to transfer zero tokens to Ney
         vm.prank(raj);
         bool success = ourToken.transfer(ney, 0);
-        assertEq(success, false); // The transfer should fail
+
+        // The transfer should fail
+        assertEq(success, false);
         assertEq(ourToken.balanceOf(ney), 0);
         assertEq(ourToken.balanceOf(raj), RAJ_STARTING_AMOUNT);
     }
