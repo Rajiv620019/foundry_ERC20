@@ -50,4 +50,15 @@ contract OurTokenTest is StdCheats, Test {
         assertEq(ourToken.balanceOf(ney), transferAmount);
         assertEq(ourToken.balanceOf(raj), RAJ_STARTING_AMOUNT - transferAmount);
     }
+
+    // Transfers
+    function testTransfers() public {
+        uint256 transferAmount = 50;
+
+        // Raj transfers tokens to Ney
+        vm.prank(raj);
+        ourToken.transfer(ney, transferAmount);
+        assertEq(ourToken.balanceOf(ney), transferAmount);
+        assertEq(ourToken.balanceOf(raj), RAJ_STARTING_AMOUNT - transferAmount);
+    }
 }
