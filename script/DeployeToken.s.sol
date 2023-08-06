@@ -7,9 +7,10 @@ import {Lamp} from "../src/Lamp.sol";
 contract DeployOurToken {
     uint256 public constant TOTAL_SUPPLY = 100 ether;
 
-    function run() external {
+    function run() external returns (Lamp) {
         vm.startBroadcast();
-        new Lamp(TOTAL_SUPPLY);
+        Lamp lamp = new Lamp(TOTAL_SUPPLY);
         vm.stopBroadcast();
+        return lamp;
     }
 }
