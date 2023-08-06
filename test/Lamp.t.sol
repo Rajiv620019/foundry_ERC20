@@ -12,7 +12,7 @@ interface MintableToken {
 }
 
 contract OurTokenTest is StdCheats, Test {
-    uint256 BOB_STARTING_AMOUNT = 100 ether;
+    uint256 RAJ_STARTING_AMOUNT = 100 ether;
 
     OurToken public ourToken;
     DeployOurToken public deployer;
