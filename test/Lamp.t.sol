@@ -32,7 +32,22 @@ contract OurTokenTest is StdCheats, Test {
         ourToken.transfer(raj, RAJ_STARTING_AMOUNT);
     }
 
+    // Initial supply
     function testInitialSupply() public {
         assertEq(ourToken.totalSupply(), deployer.INITIAL_SUPPLY());
+    }
+
+    function testAllowances() public {
+        uint256 initialAllowance = 1000;
+
+        // Raj approves Ney to spend tokens on his behalf
+        vm.prank(raj);
+        ourToken.approve(ney, initialAllowance);
+        uint256 transferAmount = 500;
+
+        vm.prank(ney);
+        ourToken.transferFrom(raj, ney, transferAmount);
+        assertEq(ourToken.balanceOf(ney), transferAmount);
+        assertEq(ourToken.balanceOf(raj), RAJ_STARTING_AMOUNT - transferAmount);
     }
 }
