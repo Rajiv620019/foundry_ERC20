@@ -61,4 +61,16 @@ contract OurTokenTest is StdCheats, Test {
         assertEq(ourToken.balanceOf(ney), transferAmount);
         assertEq(ourToken.balanceOf(raj), RAJ_STARTING_AMOUNT - transferAmount);
     }
+
+    // Transfers - insufficient balance
+    function testInsufficientBalance() public {
+        uint256 transferAmount = RAJ_STARTING_AMOUNT + 1;
+
+        // Raj attempts to transfer more tokens than they have
+        vm.prank(raj);
+        bool success = ourToken.transfer(ney, transferAmount);
+        assertEq(success, false); // The transfer should fail
+        assertEq(ourToken.balanceOf(ney), 0);
+        assertEq(ourToken.balanceOf(raj), RAJ_STARTING_AMOUNT);
+    }
 }
