@@ -83,4 +83,16 @@ contract OurTokenTest is StdCheats, Test {
         assertEq(ourToken.balanceOf(ney), 0);
         assertEq(ourToken.balanceOf(raj), RAJ_STARTING_AMOUNT);
     }
+
+    // Transfers - to the contract address
+    function testTransferToContract() public {
+        Lamp lamp = new Lamp();
+        uint256 transferAmount = 10;
+
+        // Raj transfers tokens to the Lamp contract address
+        vm.prank(raj);
+        ourToken.transfer(address(lamp), transferAmount);
+        assertEq(ourToken.balanceOf(address(lamp)), transferAmount);
+        assertEq(ourToken.balanceOf(raj), RAJ_STARTING_AMOUNT - transferAmount);
+    }
 }
