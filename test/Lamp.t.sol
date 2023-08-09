@@ -14,7 +14,7 @@ interface MintableToken {
 contract OurTokenTest is StdCheats, Test {
     uint256 RAJ_STARTING_AMOUNT = 100 ether;
 
-    OurToken public ourToken;
+    Lamp public ourToken;
     DeployOurToken public deployer;
     address public deployerAddress;
     address raj;
@@ -27,7 +27,7 @@ contract OurTokenTest is StdCheats, Test {
         raj = makeAddr("raj");
         ney = makeAddr("ney");
 
-        deployerAddress = vm.addr(deployer.deployerKey());
+        deployerAddress = vm.addr(deployer.deployerKey(""));
         vm.prank(deployerAddress);
         ourToken.transfer(raj, RAJ_STARTING_AMOUNT);
     }
